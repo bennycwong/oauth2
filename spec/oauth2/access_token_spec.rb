@@ -1,7 +1,10 @@
 require 'helper'
 
+VERBS = [:get, :post, :put, :delete]
+
 describe AccessToken do
   let(:token) { 'monkey' }
+  let(:token_body) { MultiJson.encode(:access_token => 'foo', :expires_in => 600, :refresh_token => 'bar') }
   let(:refresh_body) { MultiJson.encode(:access_token => 'refreshed_foo', :expires_in => 600, :refresh_token => 'refresh_bar') }
   let(:client) do
     Client.new('abc', 'def', :site => 'https://api.example.com') do |builder|
@@ -22,7 +25,7 @@ describe AccessToken do
   describe '#initialize' do
     it 'assigns client and token' do
       expect(subject.client).to eq(client)
-      expect(subject.token).to eq(token)
+      expect(subject.token).to  eq(token)
     end
 
     it 'assigns extra params' do

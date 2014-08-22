@@ -52,16 +52,15 @@ module OAuth2
     PARSERS = {
       :json  => lambda { |body| MultiJson.load(body) rescue body }, # rubocop:disable RescueModifier
       :query => lambda { |body| Rack::Utils.parse_query(body) },
-      :text  => lambda { |body| body },
+      :text  => lambda { |body| body }
     }
 
     # Content type assignments for various potential HTTP content types.
     CONTENT_TYPES = {
       'application/json' => :json,
       'text/javascript' => :json,
-      'text/json' => :json,
       'application/x-www-form-urlencoded' => :query,
-      'text/plain' => :text,
+      'text/plain' => :text
     }
 
     # The parsed response body.
